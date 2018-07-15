@@ -1,6 +1,5 @@
 package com.guoziwei.kline;
 
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,19 +10,21 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import com.guoziwei.klinelib.chart.KLineView;
 import com.guoziwei.klinelib.chart.OnLoadMoreListener;
 import com.guoziwei.klinelib.model.HisData;
-
+import java.util.Calendar;
 import java.util.List;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class KLineChartFragment extends Fragment {
 
 
     private KLineView mKLineView;
     private int mDay;
+    private Calendar mCalendar;
+    private int mDATE;
 
     public KLineChartFragment() {
         // Required empty public constructor
@@ -100,6 +101,7 @@ public class KLineChartFragment extends Fragment {
         List<HisData> subHisData = hisData.subList(50, hisData.size());
         mKLineView.initData(subHisData);
         mKLineView.setLimitLine();
+        mKLineView.setDateFormat("yyyy-MM-dd HH:mm:ss");
         mKLineView.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
@@ -116,7 +118,7 @@ public class KLineChartFragment extends Fragment {
             }
         });
 
-       /* new Timer().schedule(new TimerTask() {
+        new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 mKLineView.post(new Runnable() {
@@ -151,7 +153,7 @@ public class KLineChartFragment extends Fragment {
                     }
                 });
             }
-        }, 500, 1000);*/
+        }, 500, 1000);
     }
 
 }

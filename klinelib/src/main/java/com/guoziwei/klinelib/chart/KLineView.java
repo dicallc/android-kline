@@ -143,32 +143,33 @@ public class KLineView extends BaseView implements CoupleChartGestureListener.On
 
 
     protected void initChartPrice() {
-        mChartPrice.setScaleEnabled(true);
-        mChartPrice.setDrawBorders(false);
-        mChartPrice.setBorderWidth(1);
-        mChartPrice.setDragEnabled(true);
+        mChartPrice.setScaleEnabled(false);//能否缩放
+        mChartPrice.setDrawBorders(false);//是否禁止绘制图表边框的线
+        mChartPrice.setBorderWidth(1);//设置 chart 边界线的宽度，单位 dp。
+        mChartPrice.setDragEnabled(true);//能否拖拽
         mChartPrice.setScaleYEnabled(false);
         mChartPrice.setAutoScaleMinMaxEnabled(true);
-        mChartPrice.setDragDecelerationEnabled(false);
+        mChartPrice.setDragDecelerationEnabled(false);//拖拽滚动时，手放开是否会持续滚动，默认是true（false是拖到哪是哪，true拖拽之后还会有缓冲）
         LineChartXMarkerView mvx = new LineChartXMarkerView(mContext, mData);
         mvx.setChartView(mChartPrice);
         mChartPrice.setXMarker(mvx);
+        //不显示图例
         Legend lineChartLegend = mChartPrice.getLegend();
         lineChartLegend.setEnabled(false);
 
         XAxis xAxisPrice = mChartPrice.getXAxis();
-        xAxisPrice.setDrawLabels(false);
-        xAxisPrice.setDrawAxisLine(false);
-        xAxisPrice.setDrawGridLines(false);
-        xAxisPrice.setAxisMinimum(-0.5f);
+        xAxisPrice.setDrawLabels(true);//绘制标签  指x轴上的对应数值
+        xAxisPrice.setDrawAxisLine(true);//是否绘制轴线
+        xAxisPrice.setDrawGridLines(false);//是否使用 Y轴网格线条
+        xAxisPrice.setAxisMinimum(-0.5f);//设置x轴的最小值 //`
 
 
         YAxis axisLeftPrice = mChartPrice.getAxisLeft();
-        axisLeftPrice.setLabelCount(5, true);
-        axisLeftPrice.setDrawLabels(true);
-        axisLeftPrice.setDrawGridLines(false);
+        axisLeftPrice.setLabelCount(5, true);//设置X轴的显示个数
+        axisLeftPrice.setDrawLabels(true);//绘制标签  指x轴上的对应数值
+        axisLeftPrice.setDrawGridLines(false);//是否使用 Y轴网格线条
 
-        axisLeftPrice.setDrawAxisLine(false);
+        axisLeftPrice.setDrawAxisLine(false);//是否绘制轴线
         axisLeftPrice.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
         axisLeftPrice.setTextColor(mAxisColor);
         axisLeftPrice.setValueFormatter(new IAxisValueFormatter() {
